@@ -1,16 +1,22 @@
 @startuml
 
-	class Partie {
-
-	}
-
 	class Joueur {
 
-		- int Jeton
+		string Pseudo
+		string MotDePasse
+		int Jeton
 	}
 
-	class Manche {
+	class Partie {
 
+		int Numero
+		Joueur Gagnant
+	}
+
+	class Carte {
+
+		string url
+		string Effet
 	}
 
 	class Defausse {
@@ -21,71 +27,12 @@
 
 	}
 
-	abstract Carte {
-
-		- int Nombre
-		+ Effet()
-	}
-
-	class Princess {
-
-		- int Nombre = 8
-	}
-
-	class Countess {
-
-		- int Nombre = 7
-	}
-
-	class King {
-
-		- int Nombre = 6
-	}
-	class Prince {
-
-		- int Nombre = 5
-	}
-
-	class Handmaid {
-
-		- int Nombre = 4
-	}
-
-	class Baron {
-
-		- int Nombre = 3
-	}
-
-	class Priest {
-
-		- int Nombre = 2
-	}
-
-	class Guard {
-
-		- int Nombre = 1
-	}
-
-	Partie "2-4"-- Joueur
-	Partie "1"-- Manche
-
-	Joueur "0-15"-- Carte
-	Joueur "1"-- Pioche
-	Joueur "1"-- Defausse
-
-	Manche "16"-- Carte
+	Partie "1"--"1..*" Manche
+	Joueur "2..4"--"1" Manche
+	Joueur "0..2"-- Carte
+	Manche "1"-- Defausse
 	Manche "1"-- Pioche
-
-	Pioche "0-16"-- Carte
-	Defausse "0-16"-- Carte
-
-	Carte <|-- Princess
-	Carte <|-- Countess
-	Carte <|-- King
-	Carte <|-- Prince
-	Carte <|-- Handmaid
-	Carte <|-- Baron
-	Carte <|-- Priest
-	Carte <|-- Guard
+	Carte "16"-- Pioche
+	Carte "0..16"--"0..1" Defausse
 
 @enduml
