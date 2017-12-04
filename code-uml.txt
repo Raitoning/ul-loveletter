@@ -29,9 +29,9 @@
 
 	Partie "1"--"1..*" Manche
 	Joueur "2..4"--"1" Manche
-	Joueur "0..2"-- Carte
-	Manche "1"-- Defausse
-	Manche "1"-- Pioche
+	Joueur --"0..2" Carte
+	Manche --"1" Defausse
+	Manche --"1" Pioche
 	Carte "16"-- Pioche
 	Carte "0..16"--"0..1" Defausse
 
