@@ -1,0 +1,41 @@
+Commandes pour créer la base de données du projet Love Letter sous oracle.
+
+
+
+
+CREATE TABLE Carte (ID INT PRIMARY KEY NOT NULL, Image Varchar(20), Nom VARCHAR(20), Effet Varchar(250));
+
+CREATE TABLE Partie (ID INT PRIMARY KEY AUTO_INCREMENT, Gagnant VARCHAR(20));
+
+CREATE TABLE Manche (ID INT PRIMARY KEY AUTO_INCREMENT, IDPartie INT NOT NULL, IDPioche INT NOT NULL, Defausse INT NOT NULL);
+
+CREATE TABLE Partie Manche (IDPartie INT, IDManche INT, 
+PRIMARY KEY (IDPartie, IDManche),
+FOREIGN KEY (IDPartie) REFERENCES Partie(ID),
+FOREIGN KEY (IDManche) REFERENCES Manche(ID));
+
+
+
+CREATE TABLE Joueur (Pseudo VARCHAR(20) PRIMARY KEY, MotDePasse VARCHAR(20) NOT NULL, Jeton INT, MancheActuelle INT, FOREIGN KEY (MancheActuelle) REFERENCES Manche(ID));
+
+CREATE Table JoueurCarte (NomJoueur VARCHAR(20), IDCarte INT,
+PRIMARY KEY (NomJoueur, IDCarte),
+FOREIGN KEY (NomJoueur) REFERENCES Joueur(Nom),
+FOREIGN KEY (IDCarte) REFERENCES Carte(ID));
+
+
+CREATE TABLE Pioche (ID INT PRIMARY KEY AUTO_INCREMENT);
+
+CREATE Table PiocheCarte (IDPioche INT, IDCarte INT, 
+PRIMARY KEY (IDPioche, IDCarte),
+FOREIGN KEY (IDPioche) REFERENCES Pioche(ID),
+FOREIGN KEY (IDCarte) REFERENCES Carte(ID));
+
+
+
+CREATE TABLE Defausse (ID INT PRIMARY KEY AUTO_INCREMENT);
+
+CREATE Table DefausseCarte (IDDefausse INT, IDCarte INT, 
+PRIMARY KEY (IDDefausse, IDCarte),
+FOREIGN KEY (IDDefausse) REFERENCES Defausse(ID),
+FOREIGN KEY (IDCarte) REFERENCES Carte(ID));
